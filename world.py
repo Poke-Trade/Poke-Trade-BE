@@ -4,6 +4,7 @@ import random
 import math
 import bcrypt
 
+
 class World:
     def __init__(self):
         self.starting_room = None
@@ -42,7 +43,7 @@ class World:
         user = self.get_player_by_username(username)
         if user is None:
             return None
-        password_hash = bcrypt.hashpw(password.encode() ,self.password_salt)
+        password_hash = bcrypt.hashpw(password.encode(), self.password_salt)
         if user.password_hash == password_hash:
             return user
         return None
@@ -76,7 +77,4 @@ class World:
         self.rooms['narrow'].connect_rooms('n', self.rooms['treasure'])
 
         self.starting_room = self.rooms['outside']
-
-
-
 
