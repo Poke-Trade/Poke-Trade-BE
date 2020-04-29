@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
     "python.pythonPath": "/usr/local/opt/python/bin/python3.7"
+=======
+    "python.pythonPath": "/Users/mauriciodegregori/.local/share/virtualenvs/Poke-Trade-BE-zuXGOizN/bin/python"
+>>>>>>> e7c183064e435539cea0994948e50cea6a4c7664
 }
