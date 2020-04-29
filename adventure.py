@@ -2,10 +2,11 @@ import hashlib
 import json
 from time import time
 from uuid import uuid4
+import bcrypt
 
 from flask import Flask, jsonify, request, render_template
 # from pusher import Pusher
-from decouple import config
+# from decouple import config
 
 from room import Room
 from player import Player
@@ -65,9 +66,28 @@ def register():
 
 @app.route('/api/login/', methods=['POST'])
 def login():
-    # IMPLEMENT THIS
-    response = {'error': "Not implemented"}
-    return jsonify(response), 400
+    if request.method == "POST":
+        params = request.get_json()
+        required = ['username', 'password']
+        print(params)
+        if not all(i in params for i in required):
+            response = {'message': "Username and password missing"}
+            return jsonify(response), 400
+        username = params.get('username')
+        password = params.get('password')
+        player = world.get_player_by_username(username)
+        if player is not None:
+            hashed = bcrypt.hashpw(password.encode(), world.password_salt)
+            if player.password_hash == hashed:
+                player_key = world.get_player_by_username(username)
+                response = {'key': player_key}
+                return jsonify(response), 200
+            else:
+                response = {'message': "Invalid Password"}
+                return jsonify(response), 400
+        else:
+            response = {'error': "Not implemented"}
+            return jsonify(response), 400
 
 
 @app.route('/api/adv/init/', methods=['GET'])
@@ -156,4 +176,4 @@ def rooms():
 
 # Run the program on port 5000
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
