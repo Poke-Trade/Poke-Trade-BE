@@ -11,6 +11,7 @@ from flask import Flask, jsonify, request, render_template
 from room import Room
 from player import Player
 from world import World
+from grid import Grid
 
 
 # # Look up decouple for config variables
@@ -20,6 +21,12 @@ from world import World
 world = World()
 
 app = Flask(__name__)
+world.create_world()
+
+iterable = []
+for room in world.rooms:
+    iterable.append(room)
+    print("Rooms -->", room)
 
 
 @app.after_request
@@ -169,9 +176,11 @@ def sell_item():
 
 @app.route('/api/adv/rooms/', methods=['GET'])
 def rooms():
-    # IMPLEMENT THIS
+    rooms = []
+    # for room in world.rooms:
+    #     print(room)
     response = {'error': "Not implemented"}
-    return jsonify(response), 400
+    return jsonify(response), 200
 
 
 # Run the program on port 5000

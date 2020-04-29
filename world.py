@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from grid import Grid
 import random
 import math
 import bcrypt
@@ -55,52 +56,56 @@ class World:
     def create_world(self):
         # Generate 100 rooms in a 10x10 grid style
         # generate them first, then connect them all together
-        num_rooms = 100
-        rows = 10
-        columns = 10
-        id = 0
-        x = 0
-        y = 0
+        grid_map = Grid(100)
+        grid_map.create_grid(10, 10, 100)
+        self.rooms = grid_map.rooms
+        # print(grid_map.rooms)
+        # num_rooms = 100
+        # rows = 10
+        # columns = 10
+        # id = 0
+        # x = 0
+        # y = 0
 
-        rooms = []
-        for col in range(columns):
-            for row in range(rows):
-                name = "name" + "1"
-                description = "new name"
-                x = col
-                y = row
-                room = Room(name, description, id, x, y)
-                self.rooms[id] = room
-                rooms.append(room)
-                id += 1
-                rooms.append(room)
+        # rooms = []
+        # for col in range(columns):
+        #     for row in range(rows):
+        #         name = "name" + "1"
+        #         description = "new name"
+        #         x = col
+        #         y = row
+        #         room = Room(name, description, id, x, y)
+        #         self.rooms[id] = room
+        #         rooms.append(room)
+        #         id += 1
+        #         rooms.append(room)
 
-        # print(rooms)
-        self.starting_room = self.rooms[0]
-        # connect all the rooms in grid style
-        id = 0
-        for row in range(rows):
-            for col in range(columns):
-                room = self.rooms[id]
-                if row - 1 >= 0:
-                    room_n = self.rooms[col + (row - 1) * 10]
-                    room.n_to = room_n
-                if col + 1 < 10:
-                    room_e = self.rooms[col + 1 + row * 10]
-                    room.e_to = room_e
-                if row + 1 < 10:
-                    room_s = self.rooms[col + (row + 1) * 10]
-                    room.s_to = room_s
-                if col - 1 >= 0:
-                    room_w = self.rooms[col - 1 + row * 10]
-                    room.w_to = room_w
-                print(room.id, room.x, room.y,
-                      room.n_to.id if room.n_to is not None else None,
-                      room.e_to.id if room.e_to is not None else None,
-                      room.s_to.id if room.s_to is not None else None,
-                      room.w_to.id if room.w_to is not None else None
-                      )
-                id += 1
+        # # print(rooms)
+        # self.starting_room = self.rooms[0]
+        # # connect all the rooms in grid style
+        # id = 0
+        # for row in range(rows):
+        #     for col in range(columns):
+        #         room = self.rooms[id]
+        #         if row - 1 >= 0:
+        #             room_n = self.rooms[col + (row - 1) * 10]
+        #             room.n_to = room_n
+        #         if col + 1 < 10:
+        #             room_e = self.rooms[col + 1 + row * 10]
+        #             room.e_to = room_e
+        #         if row + 1 < 10:
+        #             room_s = self.rooms[col + (row + 1) * 10]
+        #             room.s_to = room_s
+        #         if col - 1 >= 0:
+        #             room_w = self.rooms[col - 1 + row * 10]
+        #             room.w_to = room_w
+        #         print("roomId ", room.id, "\nx", room.x, "\ny", room.y,
+        #               room.n_to.id if room.n_to is not None else None,
+        #               room.e_to.id if room.e_to is not None else None,
+        #               room.s_to.id if room.s_to is not None else None,
+        #               room.w_to.id if room.w_to is not None else None
+        #               )
+        #         id += 1
 
 
 num_rooms = 25  # max number of rooms to use
@@ -112,8 +117,8 @@ w = World()
 num_rooms = 25
 # width = 8
 # height = 7
-w.create_world()
-print(w)
+print(w.create_world())
+# print(w)
 # Link rooms together
 # starting room
 

@@ -29,7 +29,3 @@ class Player:
 
     def __repr__(self):
         return f"<Player: {self.username}>"
-
-
-p = Player("paul", 'room', 123)
-print(p)
