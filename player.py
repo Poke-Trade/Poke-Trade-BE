@@ -31,5 +31,5 @@ class Player:
         return f"<Player: {self.username}>"
 
 
-p = Player("paul", 'room', '123')
+p = Player("paul", 'room', 123)
 print(p)

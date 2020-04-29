@@ -69,7 +69,7 @@ def login():
     if request.method == "POST":
         params = request.get_json()
         required = ['username', 'password']
-
+        print(params)
         if not all(i in params for i in required):
             response = {'message': "Username and password missing"}
             return jsonify(response), 400
