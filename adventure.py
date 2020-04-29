@@ -23,10 +23,7 @@ world = World()
 app = Flask(__name__)
 world.create_world()
 
-iterable = []
-for room in world.rooms:
-    iterable.append(room)
-    print("Rooms -->", room)
+
 
 
 @app.after_request
@@ -176,11 +173,19 @@ def sell_item():
 
 @app.route('/api/adv/rooms/', methods=['GET'])
 def rooms():
-    rooms = []
-    # for room in world.rooms:
-    #     print(room)
-    response = {'error': "Not implemented"}
-    return jsonify(response), 200
+    iterable = []
+    for room in world.rooms:
+        room_dict = dict(room.__dict__)
+        print(room_dict)
+        room_dict['n_to'] = room.n_to.id if room.n_to is not None else ""
+        room_dict['e_to'] = room.e_to.id if room.e_to is not None else ""
+        room_dict['s_to'] = room.s_to.id if room.s_to is not None else ""
+        room_dict['w_to'] = room.w_to.id if room.w_to is not None else ""
+        iterable.append(room_dict)
+
+    response = {'rooms': iterable}
+    return jsonify(response), 200        
+
 
 
 # Run the program on port 5000
