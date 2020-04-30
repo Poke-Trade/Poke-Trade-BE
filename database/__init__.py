@@ -6,13 +6,18 @@ import os
 
 
 app = Flask(__name__)
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+db = SQLAlchemy(app)
+
+
 # secret key
 JWT_SECRET = os.getenv("SECRET")
 # initiate sqllite db
 app.config['SECRET_KEY'] = 'secret'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///game.db'
+
 # # pass app into sql db
-db = SQLAlchemy(app)
+
 bcrypt = Bcrypt(app)
 
 
