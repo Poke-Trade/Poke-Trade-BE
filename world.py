@@ -56,7 +56,18 @@ class World:
     def create_world(self):
         # Generate 100 rooms in a 10x10 grid style
         # generate them first, then connect them all together
-        grid_map = Grid(100)
-        grid_map.create_grid(10, 10, 100)
-        self.rooms = grid_map.rooms
 
+        # ASSIGN GRID NUMBER
+        grid_map = Grid(100)
+        print(grid_map.rooms)
+        # MAKE GRID SIZE
+        # grid_map.create_grid(10, 10, 100)
+        grid_map.create_grid()
+        # PLACE ALL ROOMS FROM GRID INTO MAP
+        self.rooms = grid_map.rooms
+        print("Room = ", self.rooms, "\nExit = ", self.rooms)
+
+
+
+# w = World()
+# w.create_world()

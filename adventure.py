@@ -4,7 +4,7 @@ from time import time
 from uuid import uuid4
 import bcrypt
 
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, make_response
 # from pusher import Pusher
 # from decouple import config
 
@@ -12,6 +12,7 @@ from room import Room
 from player import Player
 from world import World
 from grid import Grid
+
 
 
 # # Look up decouple for config variables
@@ -24,13 +25,10 @@ app = Flask(__name__)
 world.create_world()
 
 
-
-
 @app.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers',
-                         'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Headers','Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods', 'GET,POST,OPTIONS')
     response.headers.add('Access-Control-Allow-Credentials', 'true')
     return response
@@ -46,8 +44,6 @@ def get_player_by_header(world, auth_header):
 
     player = world.get_player_by_auth(auth_key[1])
     return player
-
-
 @app.route('/api/registration/', methods=['POST'])
 def register():
     values = request.get_json()
@@ -127,6 +123,7 @@ def move():
         response = {
             'title': player.current_room.name,
             'description': player.current_room.description,
+            'id': player.current_room.id
         }
         return jsonify(response), 200
     else:
@@ -175,17 +172,17 @@ def sell_item():
 def rooms():
     iterable = []
     for room in world.rooms:
+        # print(room)
         room_dict = dict(room.__dict__)
-        print(room_dict)
+        # print(room_dict)
         room_dict['n_to'] = room.n_to.id if room.n_to is not None else ""
-        room_dict['e_to'] = room.e_to.id if room.e_to is not None else ""
+        # room_dict['e_to'] = room.e_to.id if room.e_to is not None else ""
         room_dict['s_to'] = room.s_to.id if room.s_to is not None else ""
-        room_dict['w_to'] = room.w_to.id if room.w_to is not None else ""
+        # room_dict['w_to'] = room.w_to.id if room.w_to is not None else ""
         iterable.append(room_dict)
 
     response = {'rooms': iterable}
-    return jsonify(response), 200        
-
+    return jsonify(response), 200
 
 
 # Run the program on port 5000
