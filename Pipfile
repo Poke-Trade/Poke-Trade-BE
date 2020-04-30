@@ -6,8 +6,15 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+requests = "*"
+flask = "*"
 gunicorn = "*"
-psycopg2 = "*"
+pusher = "*"
+python-decouple = "*"
+bcrypt = "*"
+flask-bcrypt = "*"
+flask-login = "*"
+pyjwt = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.7"
