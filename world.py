@@ -59,15 +59,23 @@ class World:
 
         # ASSIGN GRID NUMBER
         grid_map = Grid(100)
-        print(grid_map.rooms)
+        # print(grid_map.rooms)
         # MAKE GRID SIZE
-        # grid_map.create_grid(10, 10, 100)
-        grid_map.create_grid()
+        grid_map.create_grid(10, 10, 100)
         # PLACE ALL ROOMS FROM GRID INTO MAP
         self.rooms = grid_map.rooms
-        print("Room = ", self.rooms, "\nExit = ", self.rooms)
+        # print("Room = ", self.rooms, "\nExit = ", self.rooms)
+#### N/S ROOMS
+        # grid_map = Grid(100)
+        # # print(grid_map.rooms)
+        # # MAKE GRID SIZE
+        # # grid_map.create_grid(10, 10, 100)
+        # grid_map.create_grid()
+        # # PLACE ALL ROOMS FROM GRID INTO MAP
+        # self.rooms = grid_map.rooms
+        # # print("Room = ", self.rooms, "\nExit = ", self.rooms)
 
 
 
-# w = World()
-# w.create_world()
+w = World()
+w.create_world()

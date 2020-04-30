@@ -33,15 +33,31 @@ class Room:
         elif direction == "s":
             self.s_to = connecting_room
             connecting_room.n_to = self
-        # elif direction == "e":
-        #     self.e_to = connecting_room
-        #     connecting_room.w_to = self
-        # elif direction == "w":
-        #     self.w_to = connecting_room
-        #     connecting_room.e_to = self
+        elif direction == "e":
+            self.e_to = connecting_room
+            connecting_room.w_to = self
+        elif direction == "w":
+            self.w_to = connecting_room
+            connecting_room.e_to = self
         else:
             print("INVALID ROOM CONNECTION")
             return None
+### N/S ROOMS
+        # if direction == "n":
+        #     self.n_to = connecting_room
+        #     connecting_room.s_to = self
+        # elif direction == "s":
+        #     self.s_to = connecting_room
+        #     connecting_room.n_to = self
+        # # elif direction == "e":
+        # #     self.e_to = connecting_room
+        # #     connecting_room.w_to = self
+        # # elif direction == "w":
+        # #     self.w_to = connecting_room
+        # #     connecting_room.e_to = self
+        # else:
+        #     print("INVALID ROOM CONNECTION")
+        #     return None
 
     def get_room_in_direction(self, direction):
         if direction == "n":
