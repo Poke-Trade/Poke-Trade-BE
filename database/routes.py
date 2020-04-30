@@ -1,10 +1,11 @@
 from database.models import User
-from database import app, db, bcrypt, JWT_SECRET
+from database import app, db, bcrypt
 from flask import request, jsonify,make_response
 from flask_login import login_user
 import jwt
 import datetime
 import json
+import os
 
 @app.route("/")
 def hello():
@@ -27,10 +28,10 @@ def register():
     entered_password_1 = req["password1"]
     entered_password_2 = req["password2"]
     if entered_password_1 == entered_password_2:
-        new_user = User(username = req["username"],password = bcrypt.generate_password_hash(entered_password_1))
+        new_user = User(username = req["username"],password = bcrypt.generate_password_hash(entered_password_1.encode("utf-8")).decode("utf-8"))
         db.session.add(new_user)
         db.session.commit()
-        token = jwt.encode({'id': new_user.id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60)}, 'JWT_SECRET')
+        token = jwt.encode({'id': new_user.id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60)}, os.getenv("SECRET"))
         return jsonify({'token' : token.decode("ascii")})
         
     else:
@@ -46,7 +47,7 @@ def login():
     auth = request.authorization
     user = User.query.filter_by(username=req["username"]).first()
     if user and bcrypt.check_password_hash(user.password, req["password"]):
-        token = jwt.encode({'id': user.id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60)}, 'JWT_SECRET')
+        token = jwt.encode({'id': user.id, 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60)}, os.getenv("SECRET"))
         return jsonify({'token' : token.decode("ascii")})
     else:
         return make_response("Sorry, invalid credentials", 401)

@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 
 app = Flask(__name__)
-print('testing db url', os.getenv('DATABASE_URL'))
+# print('testing db url', os.getenv('DATABASE_URL'))
 SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 db = SQLAlchemy(app)
@@ -16,7 +16,7 @@ db = SQLAlchemy(app)
 # secret key
 JWT_SECRET = os.getenv("SECRET")
 # initiate sqllite db
-app.config['SECRET_KEY'] = 'secret'
+app.config['SECRET_KEY'] = JWT_SECRET
 
 # # pass app into sql db
 
