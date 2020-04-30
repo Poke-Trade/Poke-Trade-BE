@@ -1,1 +1,2 @@
-web: gunicorn --workers=1 adventure:app
+web: gunicorn run:app
+
