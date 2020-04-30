@@ -15,4 +15,5 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///game.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
-from database import routes
+
+from database import routes, adventure

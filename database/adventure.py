@@ -5,11 +5,12 @@ from uuid import uuid4
 
 from flask import Flask, jsonify, request, render_template
 # from pusher import Pusher
-from decouple import config
+# from decouple import config
 
-from room import Room
-from player import Player
-from world import World
+from database.room import Room
+from database.player import Player
+from database.world import World
+from database import app, db
 
 
 # # Look up decouple for config variables
@@ -18,7 +19,7 @@ from world import World
 
 world = World()
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 
 @app.after_request
@@ -41,33 +42,6 @@ def get_player_by_header(world, auth_header):
 
     player = world.get_player_by_auth(auth_key[1])
     return player
-
-
-@app.route('/api/registration/', methods=['POST'])
-def register():
-    values = request.get_json()
-    required = ['username', 'password1', 'password2']
-
-    if not all(k in values for k in required):
-        response = {'message': "Missing Values"}
-        return jsonify(response), 400
-
-    username = values.get('username')
-    password1 = values.get('password1')
-    password2 = values.get('password2')
-
-    response = world.add_player(username, password1, password2)
-    if 'error' in response:
-        return jsonify(response), 500
-    else:
-        return jsonify(response), 200
-
-
-@app.route('/api/login/', methods=['POST'])
-def login():
-    # IMPLEMENT THIS
-    response = {'error': "Not implemented"}
-    return jsonify(response), 400
 
 
 @app.route('/api/adv/init/', methods=['GET'])
@@ -155,5 +129,5 @@ def rooms():
 
 
 # Run the program on port 5000
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=5000)
