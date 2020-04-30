@@ -16,7 +16,10 @@ flask-bcrypt = "*"
 flask-login = "*"
 pyjwt = "*"
 flask-sqlalchemy = "*"
-psycopg2 = "*"
+python-dotenv = "*"
+flask-script = "*"
+flask-migrate = "*"
+
 
 [requires]
 python_version = "3.7"

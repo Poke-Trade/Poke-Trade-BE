@@ -35,9 +35,9 @@ def register():
         
     else:
         return make_response("Sorry, passwords must match", 400)
-    hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-    db.session.add(user)
-    db.session.commit()
+    # hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+    # db.session.add(user)
+    # db.session.commit()
 
 
 @app.route("/login", methods=["GET", "POST"])
