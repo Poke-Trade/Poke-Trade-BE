@@ -15,6 +15,7 @@ bcrypt = "*"
 flask-bcrypt = "*"
 flask-login = "*"
 pyjwt = "*"
+flask-sqlalchemy = "*"
 
 [requires]
 python_version = "3.7"
