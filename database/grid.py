@@ -1,4 +1,5 @@
-from room import Room
+from database.room import Room
+
 import time
 import random
 

@@ -8,4 +8,22 @@ pylint = "*"
 autopep8 = "*"
 
 [packages]
-jwt = "*"
+requests = "*"
+flask = "*"
+gunicorn = "*"
+pusher = "*"
+python-decouple = "*"
+bcrypt = "*"
+flask-bcrypt = "*"
+flask-login = "*"
+pyjwt = "*"
+flask-sqlalchemy = "*"
+python-dotenv = "*"
+flask-script = "*"
+flask-migrate = "*"
+psycopg2-binary = "*"
+dotenv = "*"
+sqlalchemy = "*"
+
+[requires]
+python_version = "3.7"

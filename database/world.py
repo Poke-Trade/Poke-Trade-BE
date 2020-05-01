@@ -1,5 +1,5 @@
-from room import Room
-from player import Player
+from database.room import Room
+from database.player import Player
 from grid import Grid
 import random
 import math
