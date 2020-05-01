@@ -1,5 +1,4 @@
 from database.room import Room
-
 import time
 import random
 
@@ -247,11 +246,11 @@ class Grid:
         print(str)
 
 
-g = Grid()
-num_rooms = 100
-width = 10
-height = 10
-g.create_grid(width, height, num_rooms)
+# g = Grid()
+# num_rooms = 100
+# width = 10
+# height = 10
+# g.create_grid(width, height, num_rooms)
 # g.print_rooms()
 # for i in g.rooms:
 #     a = i.name

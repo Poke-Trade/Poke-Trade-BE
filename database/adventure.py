@@ -24,7 +24,7 @@ world = World()
 world.create_world()
 all_rooms = list(world.rooms)
 starting_room = all_rooms[0]
-# app = Flask(__name__)
+app = Flask(__name__)
 
 
 @app.after_request
@@ -151,14 +151,14 @@ def rooms():
         room_dict = dict(room.__dict__)
         # print(room_dict)
         room_dict['n_to'] = room.n_to.id if room.n_to is not None else ""
-        # room_dict['e_to'] = room.e_to.id if room.e_to is not None else ""
+        room_dict['e_to'] = room.e_to.id if room.e_to is not None else ""
         room_dict['s_to'] = room.s_to.id if room.s_to is not None else ""
-        # room_dict['w_to'] = room.w_to.id if room.w_to is not None else ""
+        room_dict['w_to'] = room.w_to.id if room.w_to is not None else ""
         iterable.append(room_dict)
     response = {'rooms': iterable}
     return jsonify(response), 200
 
 
 # Run the program on port 5000
-# if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=5000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
