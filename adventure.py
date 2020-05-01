@@ -190,13 +190,13 @@ def sell_item():
 def rooms():
     iterable = []
     for room in world.rooms:
-        # print(room)
+        print(room.name)
         room_dict = dict(room.__dict__)
         # print(room_dict)
         room_dict['n_to'] = room.n_to.id if room.n_to is not None else ""
-        # room_dict['e_to'] = room.e_to.id if room.e_to is not None else ""
+        room_dict['e_to'] = room.e_to.id if room.e_to is not None else ""
         room_dict['s_to'] = room.s_to.id if room.s_to is not None else ""
-        # room_dict['w_to'] = room.w_to.id if room.w_to is not None else ""
+        room_dict['w_to'] = room.w_to.id if room.w_to is not None else ""
         iterable.append(room_dict)
     response = {'rooms': iterable}
     return jsonify(response), 200
